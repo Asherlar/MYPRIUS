@@ -1,26 +1,43 @@
 <html>
-<head>
-<title>
-    My Prius
-</title>
-<script>
-function myFunction() {
-  document.getElementById("demo").innerHTML = "Hello World";
-}
-</script>
-</head>
-<body>
-<div style="background-image:url('images/PRIUS.jpg'); width: 600px; height: 300px;"> 
-<div style="background-color:red; width: 80px; height: 80px; position: relative; left: 190px; top: 190px" onclick="myFunction()"> RUEDAS DEL. </div>
-<p id="demo"></p>
-<div style="background-color:blue; width: 80px; height: 80px; position: relative; left: 490px; top: 80px" onclick="myFunction()"> RUEDAS TRAS. </div>
-<p id="demo"></p>
+  <head>
+    <title>My Prius</title>
+    <script>
+      function ruedaDelantera() {
+        document.getElementById("dela").style.display = "block";
+        document.getElementById("tras").style.display = "none";
+      }
+      function ruedatrasera() {
+        document.getElementById("tras").style.display = "block";
+        document.getElementById("dela").style.display = "none";
+      }
 
-</div> 
+      function cambioPorKMs() {
+        var kms = document.getElementsByName("kilometrosRuedaDelantera")[0].value;
+        if (kms >= 20000) {
+          document.getElementById("rueDel").style.backgroundColor = "red";
+          document.getElementById("rueDel").innerHTML = "Change!";
+        }else{
+          document.getElementById("rueDel").style.backgroundColor = "green";
+          document.getElementById("rueDel").innerHTML = 20000-kms + " KMs left";
+        }
+      }
+    </script>
+  </head>
 
-</body>
+  <body>
+    <div style="background-image:url('images/PRIUS.jpg'); width: 600px; height: 300px;"> 
+      <div id="rueDel" style="width: 80px; height: 80px; position: relative; left: 190px; top: 190px" onclick="ruedaDelantera()"></div>
+      <div id="rueTra" style="width: 80px; height: 80px; position: relative; left: 490px; top: 100px" onclick="ruedatrasera()"></div>
+    </div> 
 
-
-
-
+    <div id="dela" style="display: none;">
+        <input type="number" name="kilometrosRuedaDelantera" value="">
+        <button onclick="cambioPorKMs()">OK</button>
+    </div>
+    
+    <div id="tras" style="display: none;">
+      <input type="number" name="kilometrosRuedaTrasera" value="">
+      <button>OK</button>
+    </div>
+  </body>
 </html>
