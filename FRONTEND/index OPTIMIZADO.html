@@ -1,0 +1,136 @@
+<html>
+  <head>
+    <title>My Prius</title>
+    <script>
+      function ruedaDelantera() {
+        document.getElementById("dela").style.display = "block";
+        document.getElementById("tras").style.display = "none";
+      }
+      function ruedatrasera() {
+        document.getElementById("tras").style.display = "block";
+        document.getElementById("dela").style.display = "none";
+      }
+/*
+      function cambioPorKMs() {
+        document.getElementById("rueTra").style.backgroundColor = "";
+        document.getElementById("rueTra").innerHTML = "";
+        
+        var kms = document.getElementsByName("kilometrosRuedaDelantera")[0].value;
+        if (kms >= 20000) {
+          document.getElementById("rueDel").style.backgroundColor = "red";
+          document.getElementById("rueDel").innerHTML = "Change!";
+        }else{
+          document.getElementById("rueDel").style.backgroundColor = "green";
+          document.getElementById("rueDel").innerHTML = 20000-kms + " KMs left";
+          document.getElementById("rdtext").style.color = "green";
+        }
+      }
+
+      function cambioPorKMsTras() {
+        document.getElementById("rueDel").style.backgroundColor = "";
+        document.getElementById("rueDel").innerHTML = "";
+
+        var kms = document.getElementsByName("kilometrosRuedaTrasera")[0].value;
+        if (kms >= 20000) {
+          document.getElementById("rueTra").style.backgroundColor = "red";
+          document.getElementById("rueTra").innerHTML = "Change!";
+        }else{
+          document.getElementById("rueTra").style.backgroundColor = "green";
+          document.getElementById("rueTra").innerHTML = 20000-kms + " KMs left";
+          document.getElementById("tras").style.color = "green";
+        }
+      }
+*/
+
+/*
+      function cambioPorKMsGeneral(parametroRuedas) {
+        if (parametroRuedas === 'parametro_delantera') {
+          document.getElementById("rueTra").style.backgroundColor = "";
+          document.getElementById("rueTra").innerHTML = "";
+          
+          var kms = document.getElementsByName("kilometrosRuedaDelantera")[0].value;
+          if (kms >= 20000) {
+            document.getElementById("rueDel").style.backgroundColor = "red";
+            document.getElementById("rueDel").innerHTML = "Change!";
+          }else{
+            document.getElementById("rueDel").style.backgroundColor = "green";
+            document.getElementById("rueDel").innerHTML = 20000-kms + " KMs left";
+            document.getElementById("rdtext").style.color = "green";
+          }
+        } else if (parametroRuedas === 'parametro_trasera') {
+          document.getElementById("rueDel").style.backgroundColor = "";
+          document.getElementById("rueDel").innerHTML = "";
+
+          var kms = document.getElementsByName("kilometrosRuedaTrasera")[0].value;
+          if (kms >= 20000) {
+            document.getElementById("rueTra").style.backgroundColor = "red";
+            document.getElementById("rueTra").innerHTML = "Change!";
+          }else{
+            document.getElementById("rueTra").style.backgroundColor = "green";
+            document.getElementById("rueTra").innerHTML = 20000-kms + " KMs left";
+            document.getElementById("tras").style.color = "green";
+          }
+        }
+      }
+*/     
+
+      function cambioPorKMsGeneral(parametroRuedas) {
+        var varParaAlterarRuedaContraria = ""; 
+        var varParaAlterarRuedaSenyalada = "";
+
+        if (parametroRuedas === 'parametro_delantera') {
+          varParaAlterarRuedaContraria = "rueTra";
+          varParaAlterarRuedaSenyalada = "rueDel";
+        } else if (parametroRuedas === 'parametro_trasera') {
+          varParaAlterarRuedaContraria = "rueDel";
+          varParaAlterarRuedaSenyalada = "rueTra";
+        }         
+        
+        document.getElementById(varParaAlterarRuedaContraria).style.backgroundColor = "";
+        document.getElementById(varParaAlterarRuedaContraria).innerHTML = "";
+        
+        var kms = document.getElementsByName("kilometrosRuedaDelantera")[0].value;
+        if (kms >= 20000) {
+          document.getElementById(varParaAlterarRuedaSenyalada).style.backgroundColor = "red";
+          document.getElementById(varParaAlterarRuedaSenyalada).innerHTML = "Change!";
+
+          if (parametroRuedas === 'parametro_delantera') {
+            document.getElementById("rdtext").style.color = "red";
+          } else if (parametroRuedas === 'parametro_trasera') {
+            document.getElementById("rttext").style.color = "red";
+          }
+        }else{
+          document.getElementById(varParaAlterarRuedaSenyalada).style.backgroundColor = "green";
+          document.getElementById(varParaAlterarRuedaSenyalada).innerHTML = 20000-kms + " KMs left";
+          
+          if (parametroRuedas === 'parametro_delantera') {
+            document.getElementById("rdtext").style.color = "green";
+          } else if (parametroRuedas === 'parametro_trasera') {
+            document.getElementById("rttext").style.color = "green";
+          }
+        }
+      }  
+    </script>
+  </head>
+
+  <body>
+    <div style="background-image:url('images/PRIUS.jpg'); width: 600px; height: 300px;"> 
+      <div id="rueDel" style="width: 80px; height: 80px; position: relative; left: 190px; top: 190px" onclick="ruedaDelantera()"></div>
+      <div id="rueTra" style="width: 80px; height: 80px; position: relative; left: 490px; top: 100px" onclick="ruedatrasera()"></div>
+    </div> 
+
+    <div id="dela" style="display: none;">
+      <span id="rdtext">RUEDA DELANTERA</span> 
+      <input type="number" name="kilometrosRuedaDelantera" value="">
+      <button onclick="cambioPorKMsGeneral('parametro_delantera')">OK</button>
+      aaaaaaa
+    </div>
+    
+    <div id="tras" style="display: none;">
+      RUEDA TRASERA
+      <input type="number" name="kilometrosRuedaTrasera" value="">
+      <button onclick="cambioPorKMsGeneral('parametro_trasera')">OK</button>
+      bbbb
+    </div>
+  </body>
+</html>
