@@ -12,6 +12,9 @@
       }
 
       function cambioPorKMs() {
+        document.getElementById("rueTra").style.backgroundColor = "";
+        document.getElementById("rueTra").innerHTML = "";
+        
         var kms = document.getElementsByName("kilometrosRuedaDelantera")[0].value;
         if (kms >= 20000) {
           document.getElementById("rueDel").style.backgroundColor = "red";
@@ -19,8 +22,25 @@
         }else{
           document.getElementById("rueDel").style.backgroundColor = "green";
           document.getElementById("rueDel").innerHTML = 20000-kms + " KMs left";
+          document.getElementById("rdtext").style.color = "green";
         }
       }
+
+      function cambioPorKMsTras() {
+        document.getElementById("rueDel").style.backgroundColor = "";
+        document.getElementById("rueDel").innerHTML = "";
+
+        var kms = document.getElementsByName("kilometrosRuedaTrasera")[0].value;
+        if (kms >= 20000) {
+          document.getElementById("rueTra").style.backgroundColor = "red";
+          document.getElementById("rueTra").innerHTML = "Change!";
+        }else{
+          document.getElementById("rueTra").style.backgroundColor = "green";
+          document.getElementById("rueTra").innerHTML = 20000-kms + " KMs left";
+          document.getElementById("tras").style.color = "green";
+        }
+      }
+      
     </script>
   </head>
 
@@ -31,13 +51,17 @@
     </div> 
 
     <div id="dela" style="display: none;">
-        <input type="number" name="kilometrosRuedaDelantera" value="">
-        <button onclick="cambioPorKMs()">OK</button>
+      <span id="rdtext">RUEDA DELANTERA</span> 
+      <input type="number" name="kilometrosRuedaDelantera" value="">
+      <button onclick="cambioPorKMs()">OK</button>
+      aaaaaaa
     </div>
     
     <div id="tras" style="display: none;">
+      RUEDA TRASERA
       <input type="number" name="kilometrosRuedaTrasera" value="">
-      <button>OK</button>
+      <button onclick="cambioPorKMsTras()">OK</button>
+      bbbb
     </div>
   </body>
 </html>
