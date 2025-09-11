@@ -77,19 +77,21 @@
       function cambioPorKMsGeneral(parametroRuedas) {
         var varParaAlterarRuedaContraria = ""; 
         var varParaAlterarRuedaSenyalada = "";
+        var kms;
 
         if (parametroRuedas === 'parametro_delantera') {
           varParaAlterarRuedaContraria = "rueTra";
           varParaAlterarRuedaSenyalada = "rueDel";
+          kms = document.getElementsByName("kilometrosRuedaDelantera")[0].value;
         } else if (parametroRuedas === 'parametro_trasera') {
           varParaAlterarRuedaContraria = "rueDel";
           varParaAlterarRuedaSenyalada = "rueTra";
+          kms = document.getElementsByName("kilometrosRuedaTrasera")[0].value;
         }         
         
         document.getElementById(varParaAlterarRuedaContraria).style.backgroundColor = "";
         document.getElementById(varParaAlterarRuedaContraria).innerHTML = "";
-        
-        var kms = document.getElementsByName("kilometrosRuedaDelantera")[0].value;
+                
         if (kms >= 20000) {
           document.getElementById(varParaAlterarRuedaSenyalada).style.backgroundColor = "red";
           document.getElementById(varParaAlterarRuedaSenyalada).innerHTML = "Change!";
@@ -123,14 +125,12 @@
       <span id="rdtext">RUEDA DELANTERA</span> 
       <input type="number" name="kilometrosRuedaDelantera" value="">
       <button onclick="cambioPorKMsGeneral('parametro_delantera')">OK</button>
-      aaaaaaa
     </div>
     
     <div id="tras" style="display: none;">
-      RUEDA TRASERA
+      <span id="rttext">RUEDA TRASERA</span>
       <input type="number" name="kilometrosRuedaTrasera" value="">
       <button onclick="cambioPorKMsGeneral('parametro_trasera')">OK</button>
-      bbbb
     </div>
   </body>
 </html>
