@@ -1,6 +1,26 @@
 <html>
   <head>
     <title>My Prius</title>
+    <style>
+    .rueda-delantera-red {
+        background-image: url('images/rd_red.jpg');
+        background-repeat: no-repeat;
+        transform: translate(90px, 120px);
+    }
+    
+    .rueda-delantera-green {
+        background-image: url('images/rd_green.jpg');
+    }
+    
+    .rueda-trasera-red {
+        background-image: url('images/rt_red.jpg');
+    }
+    
+    .rueda-trasera-green {
+        background-image: url('images/rt_green.jpg');
+    }
+</style>  
+
     <script>
       function ruedaDelantera() {
         document.getElementById("dela").style.display = "block";
@@ -93,21 +113,22 @@
         document.getElementById(varParaAlterarRuedaContraria).innerHTML = "";
                 
         if (kms >= 20000) {
-          document.getElementById(varParaAlterarRuedaSenyalada).style.backgroundColor = "red";
-          document.getElementById(varParaAlterarRuedaSenyalada).innerHTML = "Change!";
-
-          if (parametroRuedas === 'parametro_delantera') {
+            if (parametroRuedas === 'parametro_delantera') {
+            document.getElementById(varParaAlterarRuedaSenyalada).className = "rueda-delantera-red";
             document.getElementById("rdtext").style.color = "red";
           } else if (parametroRuedas === 'parametro_trasera') {
+            document.getElementById(varParaAlterarRuedaSenyalada).className = "rueda-trasera-red";
             document.getElementById("rttext").style.color = "red";
           }
         }else{
-          document.getElementById(varParaAlterarRuedaSenyalada).style.backgroundColor = "green";
           document.getElementById(varParaAlterarRuedaSenyalada).innerHTML = 20000-kms + " KMs left";
           
           if (parametroRuedas === 'parametro_delantera') {
+            document.getElementById(varParaAlterarRuedaSenyalada).className = "rueda-delantera-green";
             document.getElementById("rdtext").style.color = "green";
+            
           } else if (parametroRuedas === 'parametro_trasera') {
+            document.getElementById(varParaAlterarRuedaSenyalada).className = "rueda-trasera-green";
             document.getElementById("rttext").style.color = "green";
           }
         }
@@ -117,8 +138,8 @@
 
   <body>
     <div style="background-image:url('images/PRIUS.jpg'); width: 600px; height: 300px;"> 
-      <div id="rueDel" style="width: 80px; height: 80px; position: relative; left: 190px; top: 190px" onclick="ruedaDelantera()"></div>
-      <div id="rueTra" style="width: 80px; height: 80px; position: relative; left: 490px; top: 100px" onclick="ruedatrasera()"></div>
+      <div id="rueDel" style="width: 97px; height: 97px; position: relative; left: 190px; top: 190px" onclick="ruedaDelantera()"></div>
+      <div id="rueTra" style="width: 86px; height: 86px; position: relative; left: 490px; top: 100px" onclick="ruedatrasera()"></div>
     </div> 
 
     <div id="dela" style="display: none;">
