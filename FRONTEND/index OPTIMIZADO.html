@@ -2,12 +2,18 @@
   <head>
     <title>My Prius</title>
     <style>
+    /*Posicionamiento comun de ruedas */
+    .rueda-delantera-red , .rueda-delantera-green {
+        transform: translate(-13px,-8px);
+    }
+    .rueda-trasera-green , .rueda-trasera-red {
+        transform: translate(-9px,-20px);
+    }
+    /* imagenes de cada rueda */
     .rueda-delantera-red {
         background-image: url('images/rd_red.jpg');
-        background-repeat: no-repeat;
-        transform: translate(90px, 120px);
     }
-    
+
     .rueda-delantera-green {
         background-image: url('images/rd_green.jpg');
     }
@@ -121,7 +127,6 @@
             document.getElementById("rttext").style.color = "red";
           }
         }else{
-          document.getElementById(varParaAlterarRuedaSenyalada).innerHTML = 20000-kms + " KMs left";
           
           if (parametroRuedas === 'parametro_delantera') {
             document.getElementById(varParaAlterarRuedaSenyalada).className = "rueda-delantera-green";
@@ -133,6 +138,10 @@
           }
         }
       }  
+
+      /* SINTAXIS PARA TEXTO DE KM RESTANTES
+              document.getElementById(varParaAlterarRuedaSenyalada).innerHTML = 20000-kms + " KMs left";
+      */
     </script>
   </head>
 
