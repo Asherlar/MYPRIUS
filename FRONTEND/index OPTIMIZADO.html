@@ -117,31 +117,60 @@
         
         document.getElementById(varParaAlterarRuedaContraria).style.backgroundColor = "";
         document.getElementById(varParaAlterarRuedaContraria).innerHTML = "";
-                
-        if (kms >= 20000) {
-            if (parametroRuedas === 'parametro_delantera') {
-            document.getElementById(varParaAlterarRuedaSenyalada).className = "rueda-delantera-red";
-            document.getElementById("rdtext").style.color = "red";
-          } else if (parametroRuedas === 'parametro_trasera') {
-            document.getElementById(varParaAlterarRuedaSenyalada).className = "rueda-trasera-red";
-            document.getElementById("rttext").style.color = "red";
+        
+        // Petición a backend
+        var colorbackend;
+        var msgbackend;
+        alert('Enviando al backend: ' + kms);
+        fetch('http://127.0.0.1:8000/2/' + kms)
+        .then(response => {
+          if (!response.ok) {
+            throw new Error('Error en la respuesta: ' + response.status);
           }
-        }else{
+          return response.json();
+        })
+        .then(data => {
+          console.log('Respuesta del servidor:', data);
+          alert('Respuesta del servidor: ' + JSON.stringify(data));
+          if (!data.hasOwnProperty('color')) {
+            throw new Error('La respuesta no contiene la propiedad color');
+          }
+          if (!data.hasOwnProperty('msg')) {
+            throw new Error('La respuesta no contiene la propiedad msg');
+          }
+
+          colorbackend = data.color;
+          msgbackend = data.msg;
+
+          if (colorbackend === "red") {
+              if (parametroRuedas === 'parametro_delantera') {
+              document.getElementById(varParaAlterarRuedaSenyalada).className = "rueda-delantera-red";
+              document.getElementById("rdtext").innerHTML = msgbackend;
+              document.getElementById("rdtext").style.color = "red";
+            } else if (parametroRuedas === 'parametro_trasera') {
+              document.getElementById(varParaAlterarRuedaSenyalada).className = "rueda-trasera-red";
+              document.getElementById("rttext").innerHTML = msgbackend;
+              document.getElementById("rttext").style.color = "red";
+            }
+          }else{
           
-          if (parametroRuedas === 'parametro_delantera') {
-            document.getElementById(varParaAlterarRuedaSenyalada).className = "rueda-delantera-green";
-            document.getElementById("rdtext").style.color = "green";
-            
-          } else if (parametroRuedas === 'parametro_trasera') {
-            document.getElementById(varParaAlterarRuedaSenyalada).className = "rueda-trasera-green";
-            document.getElementById("rttext").style.color = "green";
-          }
+            if (parametroRuedas === 'parametro_delantera') {
+              document.getElementById(varParaAlterarRuedaSenyalada).className = "rueda-delantera-green";
+              document.getElementById("rdtext").innerHTML = msgbackend;
+              document.getElementById("rdtext").style.color = "green";
+              
+            } else if (parametroRuedas === 'parametro_trasera') {
+              document.getElementById(varParaAlterarRuedaSenyalada).className = "rueda-trasera-green";
+              document.getElementById("rttext").innerHTML = msgbackend;
+              document.getElementById("rttext").style.color = "green";
+            }
         }
+        });
+
+
+     
       }  
 
-      /* SINTAXIS PARA TEXTO DE KM RESTANTES
-              document.getElementById(varParaAlterarRuedaSenyalada).innerHTML = 20000-kms + " KMs left";
-      */
     </script>
   </head>
 
