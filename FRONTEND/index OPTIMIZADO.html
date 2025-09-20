@@ -3,10 +3,14 @@
   <head>
 
     <title>My Prius</title>
-
-
     <style>
-    // Posicionamiento común de ruedas
+      .backend-selector {
+        margin: 10px;
+        padding: 5px;
+        display: none; /* Oculta el selector por defecto */
+      }
+
+    /* Posicionamiento común de ruedas */
     .rueda-delantera-red , .rueda-delantera-green {
         transform: translate(-13px,-8px);
     }
@@ -31,16 +35,17 @@
     }
     </style>  
 
-
-     // Funciones JS para manejar la UI y mostrar/ocultar formularios de ruedas.
-    <script>
+    <script> 
+    // Funciones JS para manejar la UI y mostrar/ocultar formularios de ruedas.
       function ruedaDelantera() {
         document.getElementById("dela").style.display = "block";
         document.getElementById("tras").style.display = "none";
+        document.getElementById("backendselector").style.display = "block"    //muestra selector backend
       }
       function ruedatrasera() {
         document.getElementById("tras").style.display = "block";
         document.getElementById("dela").style.display = "none";
+        document.getElementById("backendselector").style.display = "block"   //muestra selector backend
       }
   
 
@@ -67,10 +72,14 @@
        // Petición a backend. la API fetch realiza la petición GET al endpoint del backend con los KMs como parámetro.
         var colorbackend;
         var msgbackend;
+
+        const backendtype = document.getElementById("backendselect").value;
+        const baseurl = backendtype === "local"
+            ? "http://127.0.0.1:8000/2/"
+            : "http://16.170.250.46:8000/2/";
         alert('Enviando al backend: ' + kms);
-      //fetch('http://16.170.250.46:8000/2/' + kms)
-        fetch('http://127.0.0.1:8000/2/' + kms)
-          // Procesamos la respuesta del backend en el formato JSON esperado mediante promesas
+       fetch(baseurl + kms) 
+        // Procesamos la respuesta del backend en el formato JSON esperado mediante promesas
         // Las operaciones como fthen son asíncronas y permiten manejar la respuesta sin bloquear la UI
         // El primer then: procesa la respuesta HTTP
         .then(response => {
@@ -131,14 +140,23 @@
 
   <body>
 
-    // Imagen del coche con las dos ruedas con áreas clicables
+    <!-- Imagen del coche con las dos ruedas con áreas clicables -->
     <div style="background-image:url('images/PRIUS.jpg'); width: 600px; height: 300px;"> 
+      
       <div id="rueDel" style="width: 97px; height: 97px; position: relative; left: 190px; top: 190px" onclick="ruedaDelantera()"></div>
       <div id="rueTra" style="width: 86px; height: 86px; position: relative; left: 490px; top: 100px" onclick="ruedatrasera()"></div>
     </div> 
 
+    <!-- Selector de backend (oculto por defecto, se mostrará al clicar una rueda) -->
+    <div class="backend-selector" id="backendselector">
+      <label for="backendselect">Seleccione Backend:</label>
+      <select id="backendselect">
+          <option value="local">Local (127.0.0.1)</option>
+          <option value="remoto">Remoto (16.170.250.46)</option>
+      </select>
+    </div>
 
-    // Formularios ocultos para cada rueda, para introducir los KMs y enviarlos al backend.
+    <!-- Formularios ocultos para cada rueda, para introducir los KMs y enviarlos al backend. -->
     <div id="dela" style="display: none;">
       <span id="rdtext">RUEDA DELANTERA</span> 
       <input type="number" name="kilometrosRuedaDelantera" value="">

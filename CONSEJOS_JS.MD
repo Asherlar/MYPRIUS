@@ -38,3 +38,30 @@ Reutilización:
 Por estas razones, usar .className es considerada una mejor práctica que manipular directamente los estilos con .style.
 
 @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+
+En HTML los comentarios deben usar la sintaxis <!-- para abrir y --> para cerrar, no // como en JavaScript.
+
+Los comentarios en HTML:
+
+✅ Correctos: <!-- comentario -->
+❌ Incorrectos: // comentario
+La sintaxis // solo funciona dentro de las etiquetas <script> o <style> porque ahí el contenido se interpreta como JavaScript o CSS respectivamente.
+
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+
+Operador Ternario vs IF-ELSE
+El operador ternario (?:) es una forma más concisa de escribir una estructura if-else simple. Ambas formas son válidas:
+
+Usando operador ternario (forma concisa):
+Usando if-else (forma tradicional):
+Ventajas del operador ternario:
+Más corto: Ocupa menos líneas de código
+Más legible: En casos simples de una sola asignación
+Permite asignación directa: Se puede usar en una declaración const
+Expresivo: Comunica claramente que es una decisión entre dos valores
+Cuándo usar cada uno:
+Operador ternario: Para asignaciones simples con solo dos opciones
+if-else: Para lógica más compleja o cuando necesitas ejecutar múltiples líneas de código
+
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+
