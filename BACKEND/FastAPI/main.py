@@ -1,3 +1,5 @@
+# BACKEND/FastAPI/main.py 
+# Importamos FastAPI y CORSMiddleware para manejar CORS (Cross-Origin Resource Sharing)
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 
@@ -12,6 +14,7 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
+# Endpoint que recibe/captura los KMs y devuelve un json con el color y mensaje correspondiente al frontend
 @app.get("/2/{kms}")
 def get_kms(kms: int):
     color = "white"

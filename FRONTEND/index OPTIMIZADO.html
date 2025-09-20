@@ -1,15 +1,19 @@
 <html>
+
   <head>
+
     <title>My Prius</title>
+
+
     <style>
-    /*Posicionamiento comun de ruedas */
+    // Posicionamiento común de ruedas
     .rueda-delantera-red , .rueda-delantera-green {
         transform: translate(-13px,-8px);
     }
     .rueda-trasera-green , .rueda-trasera-red {
         transform: translate(-9px,-20px);
     }
-    /* imagenes de cada rueda */
+    // imagenes de cada rueda
     .rueda-delantera-red {
         background-image: url('images/rd_red.jpg');
     }
@@ -25,8 +29,10 @@
     .rueda-trasera-green {
         background-image: url('images/rt_green.jpg');
     }
-</style>  
+    </style>  
 
+
+     // Funciones JS para manejar la UI y mostrar/ocultar formularios de ruedas.
     <script>
       function ruedaDelantera() {
         document.getElementById("dela").style.display = "block";
@@ -36,70 +42,9 @@
         document.getElementById("tras").style.display = "block";
         document.getElementById("dela").style.display = "none";
       }
-/*
-      function cambioPorKMs() {
-        document.getElementById("rueTra").style.backgroundColor = "";
-        document.getElementById("rueTra").innerHTML = "";
-        
-        var kms = document.getElementsByName("kilometrosRuedaDelantera")[0].value;
-        if (kms >= 20000) {
-          document.getElementById("rueDel").style.backgroundColor = "red";
-          document.getElementById("rueDel").innerHTML = "Change!";
-        }else{
-          document.getElementById("rueDel").style.backgroundColor = "green";
-          document.getElementById("rueDel").innerHTML = 20000-kms + " KMs left";
-          document.getElementById("rdtext").style.color = "green";
-        }
-      }
+  
 
-      function cambioPorKMsTras() {
-        document.getElementById("rueDel").style.backgroundColor = "";
-        document.getElementById("rueDel").innerHTML = "";
-
-        var kms = document.getElementsByName("kilometrosRuedaTrasera")[0].value;
-        if (kms >= 20000) {
-          document.getElementById("rueTra").style.backgroundColor = "red";
-          document.getElementById("rueTra").innerHTML = "Change!";
-        }else{
-          document.getElementById("rueTra").style.backgroundColor = "green";
-          document.getElementById("rueTra").innerHTML = 20000-kms + " KMs left";
-          document.getElementById("tras").style.color = "green";
-        }
-      }
-*/
-
-/*
-      function cambioPorKMsGeneral(parametroRuedas) {
-        if (parametroRuedas === 'parametro_delantera') {
-          document.getElementById("rueTra").style.backgroundColor = "";
-          document.getElementById("rueTra").innerHTML = "";
-          
-          var kms = document.getElementsByName("kilometrosRuedaDelantera")[0].value;
-          if (kms >= 20000) {
-            document.getElementById("rueDel").style.backgroundColor = "red";
-            document.getElementById("rueDel").innerHTML = "Change!";
-          }else{
-            document.getElementById("rueDel").style.backgroundColor = "green";
-            document.getElementById("rueDel").innerHTML = 20000-kms + " KMs left";
-            document.getElementById("rdtext").style.color = "green";
-          }
-        } else if (parametroRuedas === 'parametro_trasera') {
-          document.getElementById("rueDel").style.backgroundColor = "";
-          document.getElementById("rueDel").innerHTML = "";
-
-          var kms = document.getElementsByName("kilometrosRuedaTrasera")[0].value;
-          if (kms >= 20000) {
-            document.getElementById("rueTra").style.backgroundColor = "red";
-            document.getElementById("rueTra").innerHTML = "Change!";
-          }else{
-            document.getElementById("rueTra").style.backgroundColor = "green";
-            document.getElementById("rueTra").innerHTML = 20000-kms + " KMs left";
-            document.getElementById("tras").style.color = "green";
-          }
-        }
-      }
-*/     
-
+      // Funciones JS que reciben los KMs de cada rueda, hacen la petición al backend y actualizan la UI según la respuesta.
       function cambioPorKMsGeneral(parametroRuedas) {
         var varParaAlterarRuedaContraria = ""; 
         var varParaAlterarRuedaSenyalada = "";
@@ -114,21 +59,27 @@
           varParaAlterarRuedaSenyalada = "rueTra";
           kms = document.getElementsByName("kilometrosRuedaTrasera")[0].value;
         }         
-        
+        // Reseteamos el estado de la rueda contraria
         document.getElementById(varParaAlterarRuedaContraria).style.backgroundColor = "";
         document.getElementById(varParaAlterarRuedaContraria).innerHTML = "";
         
-        // Petición a backend
+
+       // Petición a backend. la API fetch realiza la petición GET al endpoint del backend con los KMs como parámetro.
         var colorbackend;
         var msgbackend;
         alert('Enviando al backend: ' + kms);
+      //fetch('http://16.170.250.46:8000/2/' + kms)
         fetch('http://127.0.0.1:8000/2/' + kms)
+          // Procesamos la respuesta del backend en el formato JSON esperado mediante promesas
+        // Las operaciones como fthen son asíncronas y permiten manejar la respuesta sin bloquear la UI
+        // El primer then: procesa la respuesta HTTP
         .then(response => {
           if (!response.ok) {
             throw new Error('Error en la respuesta: ' + response.status);
           }
           return response.json();
         })
+        // El segundo then: procesa los datos JSON
         .then(data => {
           console.log('Respuesta del servidor:', data);
           alert('Respuesta del servidor: ' + JSON.stringify(data));
@@ -139,9 +90,12 @@
             throw new Error('La respuesta no contiene la propiedad msg');
           }
 
+          // Extraemos los datos del JSON
           colorbackend = data.color;
           msgbackend = data.msg;
-
+          
+          // Actualizamos la UI según el color y mensaje recibidos del backend
+          // Cambiamos la clase CSS de la rueda señalada para actualizar su imagen
           if (colorbackend === "red") {
               if (parametroRuedas === 'parametro_delantera') {
               document.getElementById(varParaAlterarRuedaSenyalada).className = "rueda-delantera-red";
@@ -174,12 +128,17 @@
     </script>
   </head>
 
+
   <body>
+
+    // Imagen del coche con las dos ruedas con áreas clicables
     <div style="background-image:url('images/PRIUS.jpg'); width: 600px; height: 300px;"> 
       <div id="rueDel" style="width: 97px; height: 97px; position: relative; left: 190px; top: 190px" onclick="ruedaDelantera()"></div>
       <div id="rueTra" style="width: 86px; height: 86px; position: relative; left: 490px; top: 100px" onclick="ruedatrasera()"></div>
     </div> 
 
+
+    // Formularios ocultos para cada rueda, para introducir los KMs y enviarlos al backend.
     <div id="dela" style="display: none;">
       <span id="rdtext">RUEDA DELANTERA</span> 
       <input type="number" name="kilometrosRuedaDelantera" value="">
@@ -191,5 +150,9 @@
       <input type="number" name="kilometrosRuedaTrasera" value="">
       <button onclick="cambioPorKMsGeneral('parametro_trasera')">OK</button>
     </div>
+
+
   </body>
+
+
 </html>
