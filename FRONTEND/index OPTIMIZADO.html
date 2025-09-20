@@ -17,7 +17,7 @@
     .rueda-trasera-green , .rueda-trasera-red {
         transform: translate(-9px,-20px);
     }
-    // imagenes de cada rueda
+    /* imagenes de cada rueda */
     .rueda-delantera-red {
         background-image: url('images/rd_red.jpg');
     }
@@ -72,7 +72,7 @@
        // Petición a backend. la API fetch realiza la petición GET al endpoint del backend con los KMs como parámetro.
         var colorbackend;
         var msgbackend;
-
+        // Se selecciona el backend al que enviar la petición según la opción elegida en el selector por el usuario.
         const backendtype = document.getElementById("backendselect").value;
         const baseurl = backendtype === "local"
             ? "http://127.0.0.1:8000/2/"
@@ -80,7 +80,7 @@
         alert('Enviando al backend: ' + kms);
        fetch(baseurl + kms) 
         // Procesamos la respuesta del backend en el formato JSON esperado mediante promesas
-        // Las operaciones como fthen son asíncronas y permiten manejar la respuesta sin bloquear la UI
+        // Las operaciones como fetch son asíncronas y permiten manejar la respuesta sin bloquear la UI
         // El primer then: procesa la respuesta HTTP
         .then(response => {
           if (!response.ok) {
@@ -98,7 +98,7 @@
           if (!data.hasOwnProperty('msg')) {
             throw new Error('La respuesta no contiene la propiedad msg');
           }
-
+          
           // Extraemos los datos del JSON
           colorbackend = data.color;
           msgbackend = data.msg;
