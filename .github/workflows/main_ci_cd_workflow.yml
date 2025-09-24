@@ -1,9 +1,11 @@
 name: CI/CD EN PC VIEJUNO 
 on: 
-  workflow_dispatch: {}
+  workflow_dispatch:
     
   push:
-    branches: [ "main", "selector_backend" ]
+    branches:
+      - main
+      - selector_backend
   
 
 # A workflow run is made up of one or more jobs that can run sequentially or in parallel
