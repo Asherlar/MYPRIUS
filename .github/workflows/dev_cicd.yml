@@ -1,5 +1,6 @@
 name: CI/CD EN EL ORDEÑADOR 
-on: workflow_dispatch
+on: 
+  workflow_dispatch:
   push:
     branches: [ selector_backend ]
   
