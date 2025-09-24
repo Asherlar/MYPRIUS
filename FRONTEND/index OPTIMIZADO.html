@@ -83,6 +83,7 @@
         // Las operaciones como fetch son asíncronas y permiten manejar la respuesta sin bloquear la UI
         // El primer then: procesa la respuesta HTTP
         .then(response => {
+          console.log('Status:', response.status);
           if (!response.ok) {
             throw new Error('Error en la respuesta: ' + response.status);
           }
@@ -158,13 +159,13 @@
 
     <!-- Formularios ocultos para cada rueda, para introducir los KMs y enviarlos al backend. -->
     <div id="dela" style="display: none;">
-      <span id="rdtext">RUEDA DELANTERA</span> 
+      <span id="rdtext">ODO Vehiculo</span> 
       <input type="number" name="kilometrosRuedaDelantera" value="">
       <button onclick="cambioPorKMsGeneral('parametro_delantera')">OK</button>
     </div>
     
     <div id="tras" style="display: none;">
-      <span id="rttext">RUEDA TRASERA</span>
+      <span id="rttext">ODO Vehiculo</span>
       <input type="number" name="kilometrosRuedaTrasera" value="">
       <button onclick="cambioPorKMsGeneral('parametro_trasera')">OK</button>
     </div>

@@ -27,7 +27,7 @@ def get_db_connection():
 # Crear la instancia de FastAPI (inicia FastAPI)
 app = FastAPI()
 
-# Permitir peticiones desde frontend local
+# Configurar CORS para permitir solicitudes desde el frontend
 app.add_middleware(
     CORSMiddleware,
     allow_origins=["*"],
